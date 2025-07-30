@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Sign Up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Sign Up" />
-    </form>
+    <div class="container is-align-content-center">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {% for field in form %}
+                
+                    <label class="label">{{ field.label_tag }}</label>
+                    <div class="control">{{ field }}</div>
+                    {% if field.help_text %}
+                        <p class="help is-info"><small class="form-text text-muted">{{ field.help_text }}</small></p>
+                    {% endif %}
+                    <br>
+                    {% for error in field.errors %}
+                        <p class="help is-danger"><span>{{ error }}</span><br></p>
+                    {% endfor %}
+                
+                {% endfor %}
+            </div>
+            <input type="submit" value="Sign Up" />
+        </form>
+    </div>
     <p>
-        <a href="{% url 'dashboard' %}">Back to dashboard</a>
+        <a href="{% url 'home' %}">Back to home</a>
     </p>
 {% endblock content %}
