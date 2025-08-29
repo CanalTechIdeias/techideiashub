@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Deletar Perfil</h2>
+<p>Tem certeza que deseja deletar seu perfil? Esta ação não pode ser desfeita.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar Deleção</button>
+    <a href="{% url 'public_profile' profile.slug %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock content %}

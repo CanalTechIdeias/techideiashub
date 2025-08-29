@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        
+        <img src="{{ profile.profile_img.url }}" alt="{{ profile.user.username }}" style="max-width:150px; border-radius:50%;">
+        <h2>@{{ profile.user.username }}</h2>
+        <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    </div>
+    <div class="profile-bio">
+        <h4>Bio</h4>
+        <p>{{ profile.bio|linebreaksbr }}</p>
+    </div>
+    <div class="profile-date">
+        <small>Última modificação: {{ profile.date_modified|date:"d/m/Y H:i" }}</small>
+    </div>
+    {% if is_owner %}
+    <div class="profile-actions" style="margin-top:20px;">
+        <a href="{% url 'update_profile' profile.slug %}" class="btn btn-primary">Atualizar Perfil</a>
+        <form action="{% url 'delete_profile' profile.slug %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Deletar Perfil</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

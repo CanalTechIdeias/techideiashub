@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
     <h2>Login</h2>
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+                <p class="help is-danger"><span>{{ error }}</span><br></p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
