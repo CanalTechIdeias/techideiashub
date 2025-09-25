@@ -12,14 +12,17 @@
         <p>{{ profile.bio|linebreaksbr }}</p>
     </div>
     <div class="profile-date">
-        <small>Última modificação: {{ profile.date_modified|date:"d/m/Y H:i" }}</small>
+        <p>Last update: {{ profile.date_modified|date:"d/m/Y H:i" }}</p>
     </div>
     {% if is_owner %}
+    <div class="profile-date">
+        <p>Birth date: {{ profile.birth_date|date:"d/m/Y" }}</p>
+    </div>
     <div class="profile-actions" style="margin-top:20px;">
-        <a href="{% url 'update_profile' profile.slug %}" class="btn btn-primary">Atualizar Perfil</a>
+        <a href="{% url 'update_profile' profile.slug %}" class="btn btn-primary">Update Profile</a>
         <form action="{% url 'delete_profile' profile.slug %}" method="post" style="display:inline;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Deletar Perfil</button>
+            <button type="submit" class="btn btn-danger">Delete profile</button>
         </form>
     </div>
     {% endif %}
